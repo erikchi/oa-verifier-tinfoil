@@ -17,13 +17,19 @@ memory: 8192
 # Container configuration
 # Note: image must include SHA256 hash (e.g., image:tag@sha256:abc123...)
 containers:
-  - name: "app"
-    image: "your-image:tag@sha256:..."
+  - name: "verifier"
+    image: "ghcr.io/openanonymity/oa-verifier:sha256-036a1bfda30140a925bd6096fa64ee408084928c77c63de980f6cc73455aafc0.sig"
     env:
       - LOG_LEVEL: "info"
     secrets:
-      - API_KEY
-    command: ["--port", "8000"]
+      - STATION_REGISTRY_URL
+      - STATION_REGISTRY_SECRET
+      - CHALLENGE_MIN_INTERVAL
+      - CHALLENGE_MAX_INTERVAL
+      - MAX_CONCURRENT_REQUESTS
+      - RATE_LIMIT_RPS
+      - RATE_LIMIT_BURST
+    command: ["-port", "8000", "-local"]
 
 # Shim configuration (adjust upstream-port and paths to match your container)
 shim:
@@ -31,3 +37,9 @@ shim:
   upstream-port: 8000
   paths:
     - /health
+    - /register
+    - /submit_key
+    - /station
+    - /broadcast
+    - /reload-config
+    - /banned-stations
