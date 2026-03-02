@@ -18,7 +18,7 @@ memory: 8192
 # Note: image must include SHA256 hash (e.g., image:tag@sha256:abc123...)
 containers:
   - name: "verifier"
-    image: "ghcr.io/openanonymity/oa-verifier:sha256-036a1bfda30140a925bd6096fa64ee408084928c77c63de980f6cc73455aafc0.sig"
+    image: "ghcr.io/openanonymity/oa-verifier:latest@sha256:036a1bfda30140a925bd6096fa64ee408084928c77c63de980f6cc73455aafc0"
     env:
       - LOG_LEVEL: "info"
     secrets:
